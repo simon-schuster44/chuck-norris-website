@@ -9,18 +9,38 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const [randomJoke, setRandomJoke] = useState(null);
   const [reload, setReload] = useState(false);
+  const [viewCount, SetViewCount] = useState(0);
+
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("https://api.chucknorris.io/jokes/random");
-      if (response.ok) {
-        const data = await response.json();
-        setRandomJoke(data);
-      } else {
-        throw new Error(`Something went wrong...`);
+      try {
+        const response = await fetch(
+          "https://api.chucknorris.io/jokes/random?category=dev"
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setRandomJoke(data);
+        } else {
+          throw new Error(`Something went wrong...`);
+        }
+      } catch (error) {
+        alert(error.message);
       }
     }
     fetchData();
   }, [reload]);
+
+  useEffect(() => {
+    async function increaseViewCount() {
+      const response = await fetch("/api/viewcount", { method: "POST" });
+      if (response.ok) {
+        const object = await response.json();
+        SetViewCount(object.count);
+      }
+    }
+    increaseViewCount();
+  }, []);
+
   return (
     <>
       <Head>
@@ -30,20 +50,23 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <Footer />
-      <main className="flex flex-col max-w-5xl m-auto">
-        <section className="flex m-4 justify-between items-center">
-          <img className="w-1/2" src="/img/chuck.png"></img>
-          <p className="m-4">{randomJoke?.value}</p>
+
+      <main className="flex flex-col max-w-5xl m-auto items-center">
+        <section className="bg-sky-700 w-4/5 flex m-4 justify-between items-center shadow-xl rounded-lg">
+          <img className="m-4 w-1/2" src="/img/chuck.png"></img>
+          <p className="m-4 text-xl italic font-sans text-slate-100">
+            "{randomJoke?.value}"
+          </p>
         </section>
 
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full m-auto"
+          className="bg-sky-700 hover:bg-sky-900 shadow-xl text-slate-100 font-bold py-2 px-4 border border-slate-100 rounded m-auto my-4"
           onClick={() => setReload(!reload)}
         >
           New One!
         </button>
       </main>
+      <Footer viewCount={viewCount} />
     </>
   );
 }
