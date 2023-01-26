@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 export default async function handler(req, res) {
   switch (req.method) {
     case "POST":
+      // find object, update counter by one and respond with updated object
       const { count } = await prisma.view.findUnique({
         where: { id: "63d2ceabd0ec0414a54cbc14" },
       });

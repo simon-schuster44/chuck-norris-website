@@ -11,6 +11,7 @@ export default function Home() {
   const [reload, setReload] = useState(false);
   const [viewCount, SetViewCount] = useState(0);
 
+  // fetch random joke on page load or when reload state changes
   useEffect(() => {
     async function fetchData() {
       try {
@@ -30,6 +31,7 @@ export default function Home() {
     fetchData();
   }, [reload]);
 
+  // fetch viewcount from api
   useEffect(() => {
     async function increaseViewCount() {
       const response = await fetch("/api/viewcount", { method: "POST" });
