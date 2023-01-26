@@ -53,7 +53,7 @@ export default function Home() {
 
       <main className="flex flex-col max-w-5xl m-auto items-center">
         <section className="bg-sky-700 w-4/5 flex m-4 justify-between items-center shadow-xl rounded-lg">
-          <img className="m-4 w-1/2" src="/img/chuck.png"></img>
+          <img className="m-4 w-1/2" src="/img/chuck.png" />
           <p className="m-4 text-xl italic font-sans text-slate-100">
             {`"${randomJoke?.value}"`}
           </p>
