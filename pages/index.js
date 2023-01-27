@@ -54,15 +54,15 @@ export default function Home() {
       <Header />
 
       <main className="flex flex-col max-w-5xl m-auto items-center">
-        <section className="bg-sky-700 w-4/5 flex m-4 justify-between items-center shadow-xl rounded-lg">
+        <section className="bg-gray-200 w-4/5 flex m-4 justify-between items-center shadow-2xl rounded-lg">
           <img className="m-4 w-1/2" src="/img/chuck.png" />
-          <p className="m-4 text-xl italic font-sans text-slate-100">
+          <p className="m-4 font-bold text-xl italic font-sans text-gray-800">
             {`"${randomJoke?.value}"`}
           </p>
         </section>
 
         <button
-          className="bg-sky-700 hover:bg-sky-900 shadow-xl text-slate-100 font-bold py-2 px-4 border border-slate-100 rounded m-auto my-4"
+          className="bg-gray-200 hover:bg-sky-700 shadow-2xl text-gray-800 font-bold py-2 px-4 rounded m-auto my-4"
           onClick={() => setReload(!reload)}
         >
           New One!
