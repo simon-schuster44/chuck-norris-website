@@ -31,7 +31,7 @@ export default function Home() {
     fetchData();
   }, [reload]);
 
-  // fetch viewcount from api
+  // fetch viewcount from api/db
   useEffect(() => {
     async function increaseViewCount() {
       const response = await fetch("/api/viewcount", { method: "POST" });
